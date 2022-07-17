@@ -99,6 +99,8 @@ export default class News extends Component {
                     title={el.title}
                     description={el.description}
                     imgURL={el.urlToImage}
+                    timeStamp={el.publishedAt}
+                    author={el.author}
                   />
                 </div>
               );

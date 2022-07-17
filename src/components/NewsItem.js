@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 export class NewsItem extends Component {
   render() {
-    let { title, description, imgURL } = this.props;
+    let { title, description, imgURL, author, timeStamp } = this.props;
+    let date = new Date(timeStamp);
+
     return (
       <div className="my-3">
         <div className="card">
@@ -14,6 +16,11 @@ export class NewsItem extends Component {
               Read More
             </a>
           </div>
+          <p className="card-text">
+            <small className="text-muted">
+              By {!author ? "unknown" : author} on {date.toDateString()}
+            </small>
+          </p>
         </div>
       </div>
     );
