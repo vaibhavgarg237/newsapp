@@ -28,11 +28,6 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link" to="/business">
                   Business
                 </Link>
@@ -68,6 +63,11 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className="form-check form-switch">
+            <a className="nav-link" href="https://www.vaibhavgarg.tech/">
+              Contact Me
+            </a>
           </div>
         </div>
       </nav>

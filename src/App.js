@@ -14,18 +14,6 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/about"
-            element={
-              <News
-                key={"general"}
-                pageSize={pageSize}
-                country={"in"}
-                category={"general"}
-              />
-            }
-          ></Route>
-          <Route
-            exact
             path="/"
             element={
               <News

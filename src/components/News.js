@@ -10,6 +10,14 @@ function News(props) {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
+  useEffect(() => {
+    updateNews(0);
+    document.title = `${
+      props.category.charAt(0).toUpperCase() + props.category.slice(1)
+    } - NewsMonkey`;
+    // eslint-disable-next-line
+  }, []);
+
   const updateNews = async (pageNo) => {
     setLoading(true);
     let url = `https://newsapi.org/v2/top-headlines?country=${
@@ -27,14 +35,6 @@ function News(props) {
       setTotalResults(parsedData.totalResults);
     }
   };
-
-  useEffect(() => {
-    updateNews(0);
-    document.title = `${
-      props.category.charAt(0).toUpperCase() + props.category.slice(1)
-    } - NewsMonkey`;
-    // eslint-disable-next-line
-  }, []);
 
   const fetchMoreData = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
@@ -66,18 +66,20 @@ function News(props) {
       >
         <div className="container">
           <div className="row">
-            {articles.map((el) => {
+            {articles.map((el, index) => {
               return (
-                <div className="col col-md-4" key={el.publishedAt}>
-                  <NewsItem
-                    title={el.title}
-                    description={el.description}
-                    imgURL={el.urlToImage}
-                    timeStamp={el.publishedAt}
-                    author={el.author}
-                    url={el.url}
-                  />
-                </div>
+                el.urlToImage !== null && (
+                  <div className="col col-md-4" key={el.publishedAt + index}>
+                    <NewsItem
+                      title={el.title}
+                      description={el.description}
+                      imgURL={el.urlToImage}
+                      timeStamp={el.publishedAt}
+                      author={el.author}
+                      url={el.url}
+                    />
+                  </div>
+                )
               );
             })}
           </div>
