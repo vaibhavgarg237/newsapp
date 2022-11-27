@@ -6,7 +6,12 @@ function NewsItem({ title, description, imgURL, author, timeStamp, url }) {
   return (
     <div className="my-3">
       <div className="card">
-        <img src={imgURL} className="card-img-top" alt="..." />
+        <img
+          src={imgURL}
+          className="card-img-top"
+          alt="..."
+          style={{ height: "14rem" }}
+        />
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
