@@ -36,9 +36,12 @@ function News(props) {
 
   const updateNews = async (pageNo) => {
     setLoading(true);
-
+    console.log(window.location.hostname);
     let parsedData = null;
-    try {
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
       let url = `https://newsapi.org/v2/top-headlines?country=${
         props.country
       }&apiKey=6404eda13d1a40099e11e1fba26b51f2&page=${
@@ -46,9 +49,7 @@ function News(props) {
       }&pagesize=${props.pageSize}&category=${props.category}`;
       let data = await fetch(url);
       parsedData = await data.json();
-    } catch (error) {
-      console.log(error);
-
+    } else {
       switch (props.category) {
         case "general":
           parsedData = general;
@@ -88,7 +89,10 @@ function News(props) {
 
   const fetchMoreData = async () => {
     let parsedData = null;
-    try {
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
       let url = `https://newsapi.org/v2/top-headlines?country=${
         props.country
       }&apiKey=6404eda13d1a40099e11e1fba26b51f2&page=${page + 1}&pagesize=${
@@ -96,10 +100,11 @@ function News(props) {
       }&category=${props.category}`;
       let data = await fetch(url);
       parsedData = await data.json();
-    } catch (error) {
-      console.log("fetchMoreData: ", error);
+    } else {
+      console.log("fetchMoreData");
       parsedData = general;
     }
+
     console.log("fetchMoreData");
     setArticles(articles.concat(parsedData.articles));
     setTotalResults(parsedData.totalResults);
@@ -116,9 +121,9 @@ function News(props) {
       {loading && <Spin />}
 
       <InfiniteScroll
-        dataLength={articles.length}
+        dataLength={articles?.length}
         next={fetchMoreData}
-        hasMore={articles.length !== totalResults}
+        hasMore={articles?.length !== totalResults}
         loader={<Spin />}
       >
         <div className="container">
